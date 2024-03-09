@@ -47,7 +47,16 @@ def signinpage(request):
         else:
             messages.info(request,'Invalid Username or password')
             return redirect('crmsignin')
+        
+def crmcontact(request):
+    return render(request,'crmcontact.html')
+
+def log_out(request):
+    auth.logout(request)
+    return redirect('crmhome')
 
 def crmloginpage(request):
-     return render(request,'crmloginpage.html')
+     currentuser=request.user.username
+     
+     return render(request,'crmloginpage.html',{'currentuser':currentuser})
      
