@@ -10,5 +10,6 @@ urlpatterns = [
     path('signinpage',views.signinpage,name='signinpage'),
     path('crmloginpage',views.crmloginpage,name='crmloginpage'),
     path('crmcontact',views.crmcontact,name='crmcontact'),
+    path('crmpricing',views.crmpricing,name='crmpricing'),
     path('log_out',views.log_out,name='log_out'),
 ]

@@ -51,6 +51,9 @@ def signinpage(request):
 def crmcontact(request):
     return render(request,'crmcontact.html')
 
+def crmpricing(request):
+    return render(request,'crmpricing.html')
+
 def log_out(request):
     auth.logout(request)
     return redirect('crmhome')
