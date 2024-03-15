@@ -1,0 +1,24 @@
+{% extends 'crmusernav.html' %}
+{% block content %}
+{% load static %}
+<main style="min-height: 100vh;">
+    <main style="min-height: 100vh;">
+        <div class="container">
+            <div class="row mt-3">
+                {% for archived_card in archived_cards %}
+                <div class="col-sm-4 mb-3">
+                    <div class="card" style="border-top: 5px solid {{ archived_card.color }};">
+                        <div class="card-body">
+                            <h1 class="card-title text-info">{{ archived_card.title }}</h1>
+                            <hr style="border-color: green; margin: 0 auto 0 0;">
+                            <p class="card-text">Rs<b style="font-size: 5rem;" class="text-primary">{{ archived_card.price }}</b></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+</main>
+
+{% endblock %}

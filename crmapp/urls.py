@@ -8,8 +8,10 @@ urlpatterns = [
     path('crmregister',views.crmregister,name='crmregister'),
     path('register',views.register,name='register'),
     path('signinpage',views.signinpage,name='signinpage'),
+    path('crmusernav',views.crmusernav,name='crmusernav'),
     path('crmloginpage',views.crmloginpage,name='crmloginpage'),
     path('crmcontact',views.crmcontact,name='crmcontact'),
     path('crmpricing',views.crmpricing,name='crmpricing'),
     path('log_out',views.log_out,name='log_out'),
+    path('crmarchive',views.crmarchive,name='crmarchive'),
 ]
