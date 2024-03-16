@@ -14,4 +14,10 @@ urlpatterns = [
     path('crmpricing',views.crmpricing,name='crmpricing'),
     path('log_out',views.log_out,name='log_out'),
     path('crmarchive',views.crmarchive,name='crmarchive'),
+    path('adminhome',views.adminhome,name='adminhome'),
+    path('appdetails',views.appdetails,name='appdetails'),
+    path('archive_app/<int:id>',views.archive_app,name='archive_app'),
+    path('archiveremove/<int:id>',views.archiveremove,name='archiveremove'),
+   
+    
 ]

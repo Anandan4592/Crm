@@ -4,6 +4,8 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User,auth
 from django.http import HttpResponse
 import json
+from django.http import JsonResponse
+from .models import App,Archive
 # Create your views here.
 def crmhome(request):
     return render(request,'crmhome.html')
@@ -44,8 +46,13 @@ def signinpage(request):
         password=request.POST['pas']
         user=auth.authenticate(username=uname,password=password)
         if user is not None:
-            auth.login(request,user)
-            return redirect('crmloginpage')
+            if user.is_staff:
+                login(request,user)
+                return redirect('adminhome')
+            else:
+                login(request,user)
+                auth.login(request,user)
+                return redirect('crmloginpage')
         else:
             messages.info(request,'Invalid Username or password')
             return redirect('crmsignin')
@@ -65,22 +72,41 @@ def crmusernav(request):
 
 def crmloginpage(request):
      currentuser=request.user.username
-     
-     return render(request,'crmloginpage.html',{'currentuser':currentuser})
+     product=App.objects.all()
+     return render(request,'crmloginpage.html',{'currentuser':currentuser,'product':product})
 
 def crmarchive(request):
     currentuser=request.user.username
     return render(request,'crmarchive.html',{'currentuser':currentuser})
 
-def archive(request):
-    if 'card' in request.GET:
-        # Retrieve the encoded card data from the URL parameters
-        encoded_card_data = request.GET['card']
-        # Decode the card data from URL encoding
-        card_data = json.loads(encoded_card_data)
-        # Render the archive page with the card data
-        return render(request, 'crmarchive.html', {'card_data': card_data})
-    else:
-        # If there is no card data in the URL parameters, render the archive page without any data
-        return render(request, 'crmarchive.html')
+def adminhome(request):
+    return render(request,'adminhome.html')
+
+def appdetails(request):
+    if request.method=='POST':
+        name=request.POST['name']
+        price=request.POST['price']
+        
+        data=App(name=name,price=price)
+        data.save()
+        
+        return redirect('adminhome')
+    
+def crmarchive(request):
+    currentuser=request.user
+    arch=Archive.objects.filter(user=currentuser)
+    return render(request,'crmarchive.html',{'arch':arch})
+
+def archive_app(request,id):
+    product=App.objects.get(id=id)
+    currentuser=request.user
+    data,created=Archive.objects.get_or_create(app=product,user=currentuser)
+    data.save()
+    return redirect('crmloginpage')
+
+def archiveremove(request,id):
+    product=Archive.objects.get(id=id)
+    product.delete()
+    return redirect('crmarchive')
+
      

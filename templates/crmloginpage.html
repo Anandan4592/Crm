@@ -10,75 +10,27 @@
         </div>
     </section>
     <div class="container">
-      <div id="delete-icon" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: pointer;z-index: 9999; ">
-        <i class="fa-solid fa-box-archive" style="color: #000000;font-size: 5rem;"></i>
-</div>
+     
 <div class="row mt-3" id="card-container">
-<div class="col-sm-4 mb-3">
-  <div class="card" style="border-top: 5px solid red;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)">
-      <div class="card-body">
-          <h1 class="card-title text-info">Light Room</h1>
-          <hr style="border-color: green; margin: 0 auto 0 0;">
-          <p class="card-text ">Rs<b style="font-size: 5rem;" class="text-primary">600</b></p>
-          <button type="submit" class="btn btn-info btn-block mt-4 mb-4 "><a href="" style="color: white;text-decoration: none;">Buy</a></button>
-      </div>
-  </div>
-</div>
-<div class="col-sm-4 mb-3">
-  <div class="card" style="border-top: 5px solid yellow;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)">
-      <div class="card-body">
-          <h1 class="card-title text-info">Snapseed</h1>
-          <hr style="border-color: green; margin: 0 auto 0 0;">
-          <p class="card-text ">Rs<b style="font-size: 5rem;" class="text-primary">500</b></p>
-          <button type="submit" class="btn btn-info btn-block mt-4 mb-4 "><a href="" style="color: white;text-decoration: none;">Buy</a></button>
-      </div>
-  </div>
-</div>
-<div class="col-sm-4 mb-3">
-  <div class="card" style="border-top: 5px solid green;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)">
-      <div class="card-body">
-          <h1 class="card-title text-info">Autocad</h1>
-          <hr style="border-color: green; margin: 0 auto 0 0;">
-          <p class="card-text ">Rs<b style="font-size: 5rem;" class="text-primary">750</b></p>
-          <button type="submit" class="btn btn-info btn-block mt-4 mb-4 "><a href="" style="color: white;text-decoration: none;">Buy</a></button>
-      </div>
-  </div>
-</div>
+    {% for app in product %}
+    <div class="col-sm-4 mb-3">
+        <div class="card" style="border-top: 5px solid red;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" data-app-id="{{ app.id }}">
+            <div class="card-body">
+                <h1 class="card-title text-info">{{ app.name }}</h1>
+                <hr style="border-color: green; margin: 0 auto 0 0;">
+                <p class="card-text">Rs<b style="font-size: 5rem;" class="text-primary">{{ app.price }}</b></p>
+                <button type="submit" class="btn btn-info btn-block mt-4 mb-4 "><a href="" style="color: white;text-decoration: none;">Buy</a></button>
+                <div class="delete-icon" style="display: none;">
+                    <a href="{% url 'archive_app' app.id  %}" class="delete-link" data-app-id="{{ app.id }}"><i class="fa-solid fa-box-archive" style="color: #000000;font-size: 5rem;"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 
-<div class="row mt-3" id="card-container">
-<div class="col-sm-4 mb-3">
-  <div class="card" style="border-top: 5px solid red;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)">
-      <div class="card-body">
-          <h1 class="card-title text-info">Photoshop</h1>
-          <hr style="border-color: green; margin: 0 auto 0 0;">
-          <p class="card-text ">Rs<b style="font-size: 5rem;" class="text-primary">750</b></p>
-          <button type="submit" class="btn btn-info btn-block mt-4 mb-4 "><a href="" style="color: white;text-decoration: none;">Buy</a></button>
-      </div>
-  </div>
-</div>
-<div class="col-sm-4 mb-3">
-  <div class="card" style="border-top: 5px solid yellow;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)">
-      <div class="card-body">
-          <h1 class="card-title text-info">3DX max</h1>
-          <hr style="border-color: green; margin: 0 auto 0 0;">
-          <p class="card-text ">Rs<b style="font-size: 5rem;" class="text-primary">850</b></p>
-          <button type="submit" class="btn btn-info btn-block mt-4 mb-4 "><a href="" style="color: white;text-decoration: none;">Buy</a></button>
-      </div>
-  </div>
-</div>
-<div class="col-sm-4 mb-3">
-  <div class="card" style="border-top: 5px solid green;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)">
-      <div class="card-body">
-          <h1 class="card-title text-info">VS Code</h1>
-          <hr style="border-color: green; margin: 0 auto 0 0;">
-          <p class="card-text ">Rs<b style="font-size: 5rem;" class="text-primary">750</b></p>
-          <button type="submit" class="btn btn-info btn-block mt-4 mb-4 "><a href="" style="color: white;text-decoration: none;">Buy</a></button>
-      </div>
-  </div>
-</div>
-</div>
-   
+
+
     
     <div class="row mt-5"  style="text-align: center;">
         <a href="" class="col-lg-2 mb-2" style="text-decoration: none;color: black;">
@@ -122,55 +74,36 @@
 
 </div>
 </main>
-<script>
-    let deleteIcon = document.getElementById("delete-icon");
 
+
+<script>
     function drag(event) {
-        // Show the delete icon when dragging starts
-        deleteIcon.style.display = "block";
-        event.dataTransfer.setData("text", event.target.id);
+        event.dataTransfer.setData("text", event.target.dataset.appId);
+        // Show delete icon when dragging starts
+        event.target.querySelector('.delete-icon').style.display = 'block';
     }
 
     function dragEnd(event) {
-        // Hide the delete icon when dragging ends
-        deleteIcon.style.display = "none";
+        // Hide delete icon when dragging ends
+        event.target.querySelector('.delete-icon').style.display = 'none';
     }
 
-    document.addEventListener("dragover", function (event) {
-        // Prevent default to allow drop
-        event.preventDefault();
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteLinks = document.querySelectorAll('.delete-link');
 
-    document.addEventListener("drop", function (event) {
-        // Prevent default action (open as link for some elements)
-        event.preventDefault();
-        // Get the dropped card
-        let data = event.dataTransfer.getData("text");
-        let droppedCard = document.getElementById(data);
-        // Check if the dropped card is near the delete icon
-        let deleteIconBounds = deleteIcon.getBoundingClientRect();
-        let cardBounds = droppedCard.getBoundingClientRect();
-        // Check if the center of the dropped card is within the delete icon bounds
-        if (cardBounds.left <= deleteIconBounds.right &&
-        cardBounds.right >= deleteIconBounds.left &&
-        cardBounds.top <= deleteIconBounds.bottom &&
-        cardBounds.bottom >= deleteIconBounds.top) {
-        // If dropped near delete icon, remove the card from the DOM
-        droppedCard.parentElement.remove();
-        // Get card data
-        let cardTitle = droppedCard.querySelector('.card-title').innerText.trim();
-        let cardColor = droppedCard.style.borderTopColor;
-        let cardPrice = droppedCard.querySelector('.text-primary').innerText.trim();
-        // Encode card data for URL
-        let encodedCardData = encodeURIComponent(JSON.stringify({
-            title: cardTitle,
-            color: cardColor,
-            price: cardPrice
-        }));
-        // Redirect to archive page with card data
-        window.location.href = "{% url 'crmarchive' %}?card=" + encodedCardData;
-    }
+        deleteLinks.forEach(link => {
+            link.addEventListener('dragover', function (event) {
+                event.preventDefault();
+            });
+
+            link.addEventListener('drop', function (event) {
+                event.preventDefault();
+                const appId = event.dataTransfer.getData("text");
+                const url = this.getAttribute('href').replace('app_id', appId);
+                // Navigate to the URL
+                window.location.href = url;
+            });
+        });
     });
 </script>
-
 {% endblock %}
