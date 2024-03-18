@@ -73,7 +73,8 @@ def crmusernav(request):
 def crmloginpage(request):
      currentuser=request.user.username
      product=App.objects.all()
-     return render(request,'crmloginpage.html',{'currentuser':currentuser,'product':product})
+     archived_app_ids = Archive.objects.values_list('app_id', flat=True)
+     return render(request,'crmloginpage.html',{'currentuser':currentuser,'product':product,'archived_app_ids': archived_app_ids})
 
 def crmarchive(request):
     currentuser=request.user.username

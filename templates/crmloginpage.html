@@ -13,6 +13,7 @@
      
 <div class="row mt-3" id="card-container">
     {% for app in product %}
+    {% if app.id not in archived_app_ids %}
     <div class="col-sm-4 mb-3">
         <div class="card" style="border-top: 5px solid red;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" data-app-id="{{ app.id }}">
             <div class="card-body">
@@ -26,6 +27,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 
