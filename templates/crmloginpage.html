@@ -1,12 +1,45 @@
 {% extends 'crmusernav.html' %}
 {% block content %}
 {% load static %}
-
+<style>
+    /* Fade-in animation */
+    .animate-fade-in {
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    /* Slide-in animation */
+    .animate-slide-in {
+        opacity: 0;
+        transform: translateX(-50px);
+        animation: slideIn 1s forwards;
+    }
+    
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+</style>
 <main>
-    <section class="mb-5">
+    <section class="mb-5 ">
         <div class="container-fluid" style="background-image: linear-gradient(to right, rgb(21, 147, 220) , rgb(169, 232, 227));text-align: center;">
-            <h1 class="text-white " style="padding-top: 8%;font-size: 5rem;">Choose your Apps</h1>
-                    <h5 class="text-white" style="padding-bottom: 8%;">Free instant access, no credit card required.</h5>
+            <h1 class="text-white animate-slide-in " style="padding-top: 8%;font-size: calc(4.5vw + 1rem);">Choose your Apps</h1>
+                    <h5 class="text-white animate-slide-in" style="padding-bottom: 8%;">Free instant access, no credit card required.</h5>
         </div>
     </section>
     <div class="container">
@@ -15,7 +48,7 @@
     {% for app in product %}
     {% if app.id not in archived_app_ids %}
     <div class="col-sm-4 mb-3">
-        <div class="card" style="border-top: 5px solid red;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" data-app-id="{{ app.id }}">
+        <div class="card animate-fade-in"style="border-top: 5px solid red;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" data-app-id="{{ app.id }}">
             <div class="card-body">
                 <h1 class="card-title text-info">{{ app.name }}</h1>
                 <hr style="border-color: green; margin: 0 auto 0 0;">
@@ -34,7 +67,7 @@
 
 
     
-    <div class="row mt-5"  style="text-align: center;">
+    <div class="row mt-5 animate-slide-in"  style="text-align: center;">
         <a href="" class="col-lg-2 mb-2" style="text-decoration: none;color: black;">
             
                 <img   src="https://download.odoocdn.com/icons/web_studio/static/description/icon.svg"/>

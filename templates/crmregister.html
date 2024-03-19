@@ -43,11 +43,38 @@
         background-color: hsla(0, 0%, 100%, 0.9) !important;
         backdrop-filter: saturate(200%) blur(25px);
       }
+      
+      .animate-fade-in {
+        opacity: 0;
+        animation: fadeIn 1s ease-in-out forwards;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .animate-slide-left {
+        animation: slideLeft 1s ease-in-out forwards;
+      }
+
+      @keyframes slideLeft {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
     </style>
   
     <div class="container px-4 py-5 px-md-5 text-center text-lg-start ">
       <div class="row gx-lg-5 align-items-center mb-5">
-        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative animate-slide-left">
           <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
             The best offer <br />
             <span style="color: hsl(218, 81%, 75%)">for your business</span>
@@ -57,7 +84,7 @@
           </p>
         </div>
   
-        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative animate-fade-in">
           <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
           <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
   
@@ -141,14 +168,6 @@
     </div>
   </section>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      <script>
-        {% for msg in messages %}
-        swal({
-        title: "{{msg}}",
-        text: "{{msg.tags}}",
-        icon: "{{msg.tags}}",
-      });
-        {% endfor %}
-       </script>
-  <!-- Section: Design Block -->
+
+
 {% endblock %}

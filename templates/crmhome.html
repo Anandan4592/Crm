@@ -24,15 +24,97 @@
     .card {
         cursor: grab;
     }
+    .flip-card {
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10%; /* Adjust the value to position the backside content higher */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 </style>
 
-<main>
+<main style="border-top: 5px solid green;" class="animated-section">
 
-    <section style="border-top: 5px solid green;" class="animated-section">
+    <section>
+        <div class="container">
+            <h1 class="text-info text-center mt-5" style="font-size: calc(2.5vw + 1rem);">Meet the World's Most Popular<br>
+                Customizable CRM Software</h1>
+            <hr style="border-color: green; ">
+            <div class="row">
+                <div class="col-md-5">
+                    <h1 style="font-size: calc(3.5vw + 1rem);color: orange;">Х5 CRM</h1>
+                    <h1 style="font-size: calc(2.5vw + 1rem);">   Five times your average CRM</h1>
+                    <h4 >CRM is a sales powerhouse consisting of the 5 key elements:<span style="color: orange;"> Softwares, marketing, client service, team collaboration, and integrations </span>- all rolled into a single platform</h4>
+                <div class="row mt-5">
+                    <div class="col-md-6"><a href="{% url 'crmregister' %}" style="text-decoration: none;"><button type="button" class="btn btn-primary btn-block ">GET STARTED</button></a></div>
+                    <div class="col-md-6"><a href="{% url 'crmpricing' %}" style="text-decoration: none;"><button type="button" class="btn  btn-block">TRY FOR FREE</button></a></div>
+                </div>
+                </div>
+                <div class="col-md-2">
+                    <span hidden>hh</span>
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <img src="{% static 'images/home2.webp' %}" class="img-fluid" alt="Sample image">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <h4 class="text-success" style="font-size: calc(3.5vw + 1rem)">Marketing</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <img src="{% static 'images/hom1.jpg' %}" class="img-fluid" alt="Sample image">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <h4 class="text-success"  style="font-size: calc(3.5vw + 1rem)">Client Service</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section >
 
         <div class="container text-center mt-5" style="padding-top: 2%;">
-            <h1 class="text-info" style="font-size: calc(2.5vw + 1rem);">Meet the World's Most Popular<br>
-                Customizable CRM Software</h1>
+        
             <hr style="border-color: green; ">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
                 <ol class="carousel-indicators">
@@ -66,7 +148,7 @@
             </h4>
         </div>
     </section>
-
+    
     <section class="animated-section">
         <div class="text-center mb-5">
             <a href="" class="btn btn-success mt-3 btn-info-hover"
@@ -80,9 +162,7 @@
             </a>
 
         </div>
-        <div class="container">
-            <img class="d-block w-100" src="{% static 'images/crm2.jpg' %}">
-        </div>
+       
     </section>
 
     <section class="background-radial-gradient overflow-hidden position-relative mt-5 mb-5 animated-section">
