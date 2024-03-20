@@ -38,6 +38,24 @@ def register(request):
             user=User.objects.create_user(first_name=firstname,last_name=lastname,username=username,email=email,password=password)
             user.save()
             messages.success(request,'Registration Successfull')
+            if App.objects.exists():
+                # Table is not empty, do nothing
+                pass
+            else:
+          
+                app1 = App(name="Light Room", price=600)
+                app1.save()
+                app2 = App(name="Snapseed", price=500)
+                app2.save()
+                app3 = App(name="Autocad", price=750)
+                app3.save()
+                app4 = App(name="Photoshop", price=750)
+                app4.save()
+                app5 = App(name="3DX max", price=850)
+                app5.save()
+                app6 = App(name="VS Code", price=750)
+                app6.save()
+              
             return redirect('crmsignin')
     
 def signinpage(request):
@@ -46,10 +64,7 @@ def signinpage(request):
         password=request.POST['pas']
         user=auth.authenticate(username=uname,password=password)
         if user is not None:
-            if user.is_staff:
-                login(request,user)
-                return redirect('adminhome')
-            else:
+            
                 login(request,user)
                 auth.login(request,user)
                 return redirect('crmloginpage')

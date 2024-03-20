@@ -34,6 +34,10 @@
             transform: translateX(0);
         }
     }
+    .section-with-shadow {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* You can adjust the shadow values as needed */
+    padding: 20px; /* Add padding if necessary to prevent shadow clipping */
+}
 </style>
 <main>
     <section class="mb-5 ">
@@ -48,14 +52,14 @@
     {% for app in product %}
     {% if app.id not in archived_app_ids %}
     <div class="col-sm-4 mb-3">
-        <div class="card animate-fade-in"style="border-top: 5px solid red;" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" data-app-id="{{ app.id }}">
-            <div class="card-body">
-                <h1 class="card-title text-info">{{ app.name }}</h1>
-                <hr style="border-color: green; margin: 0 auto 0 0;">
-                <p class="card-text">Rs<b style="font-size: 5rem;" class="text-primary">{{ app.price }}</b></p>
-                <button type="submit" class="btn btn-info btn-block mt-4 mb-4 "><a href="" style="color: white;text-decoration: none;">Buy</a></button>
+        <div class="card animate-fade-in"style="border-top: 5px solid red; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" data-app-id="{{ app.id }}">
+            <div class="card-body section-with-shadow">
+                <h1 class="card-title text-info text-center section-with-shadow">{{ app.name }}</h1>
+              
+                <p class="card-text text-center">Rs<b style="font-size: 5rem;" class="text-primary">{{ app.price }}</b></p>
+                <button type="submit" class="btn btn-info btn-block  mt-4 mb-4 " style="box-shadow: 0 4px 8px rgba(0,0,0,0.5)"><a href="" style="color: white;text-decoration: none;">Buy</a></button>
                 <div class="delete-icon" style="display: none;">
-                    <a href="{% url 'archive_app' app.id  %}" class="delete-link" data-app-id="{{ app.id }}"><i class="fa-solid fa-box-archive" style="color: #000000;font-size: 5rem;"></i></a>
+                    <a href="{% url 'archive_app' app.id  %}" class="delete-link " data-app-id="{{ app.id }}"><i class="fa-solid fa-box-archive" style="color: #000000;font-size: 5rem;"></i></a>
                 </div>
             </div>
         </div>

@@ -97,6 +97,13 @@
   $(function() {
     $('.slide-left').addClass('animate-slide-left');
   });
+  {% for msg in messages %}
+        swal({
+        title: "{{msg}}",
+        text: "{{msg.tags}}",
+        icon: "{{msg.tags}}",
+      });
+        {% endfor %}
 </script>
 
 {% endblock %}
