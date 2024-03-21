@@ -3,22 +3,22 @@
 {% load static %}
 
 <style>
-    /* Animation for slide-in from bottom to top */
-    @keyframes slideInFromBottom {
-        from {
-            transform: translateY(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
+   /* Animation for slide-in from right to left */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
     }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
 
-    /* Apply slide-in animation to specific sections */
-    .animated-section {
-        animation: slideInFromBottom 1s ease forwards;
-    }
+/* Apply slide-in animation to specific sections */
+.animated-section {
+    animation: slideInFromRight 1s ease forwards;
+}
 
     /* Additional styling */
     .card {

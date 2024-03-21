@@ -39,7 +39,7 @@
     padding: 20px; /* Add padding if necessary to prevent shadow clipping */
 }
 </style>
-<main>
+<main >
     <section class="mb-5 ">
         <div class="container-fluid" style="background-image: linear-gradient(to right, rgb(21, 147, 220) , rgb(169, 232, 227));text-align: center;">
             <h1 class="text-white animate-slide-in " style="padding-top: 8%;font-size: calc(4.5vw + 1rem);">Choose your Apps</h1>
@@ -52,7 +52,7 @@
     {% for app in product %}
     {% if app.id not in archived_app_ids %}
     <div class="col-sm-4 mb-3">
-        <div class="card animate-fade-in"style="border-top: 5px solid red; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" data-app-id="{{ app.id }}">
+        <div class="card animate-fade-in"style="border-top: 5px solid red; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" ontouchstart="touchStart(event)"  ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-app-id="{{ app.id }}">
             <div class="card-body section-with-shadow">
                 <h1 class="card-title text-info text-center section-with-shadow">{{ app.name }}</h1>
               
@@ -115,6 +115,7 @@
 </main>
 
 
+
 <script>
     function drag(event) {
         event.dataTransfer.setData("text", event.target.dataset.appId);
@@ -125,6 +126,29 @@
     function dragEnd(event) {
         // Hide delete icon when dragging ends
         event.target.querySelector('.delete-icon').style.display = 'none';
+    }
+
+      function touchStart(event) {
+        // Prevent default to avoid unexpected behavior
+        event.preventDefault();
+        // Extracting app ID for touch event
+        const appId = event.target.dataset.appId;
+        // Storing app ID in touch event data
+        event.dataTransfer.setData("text", appId);
+        // Show delete icon when touch starts
+        event.target.parentNode.querySelector('.delete-icon').style.display = 'block';
+    }
+
+    function touchMove(event) {
+        // Prevent default to avoid unexpected behavior
+        event.preventDefault();
+    }
+
+    function touchEnd(event) {
+        // Prevent default to avoid unexpected behavior
+        event.preventDefault();
+        // Hide delete icon when touch ends
+        event.target.parentNode.querySelector('.delete-icon').style.display = 'none';
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -145,4 +169,5 @@
         });
     });
 </script>
+
 {% endblock %}
